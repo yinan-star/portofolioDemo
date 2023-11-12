@@ -1,0 +1,28 @@
+// 这个文件用于定义一些通用的版式，其他类可以继承该文件，从而为按钮元素添加圆角和阴影效果or other effects.
+%cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+  
+//   %center {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//   }
+
+  
+@mixin ratio($width, $height) {
+    position: relative;
+    overflow: hidden;
+    font-size: 0;
+  
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      padding-top: $height / $width * 100%;
+    }
+}

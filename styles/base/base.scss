@@ -1,0 +1,8 @@
+body{
+    @extend %description-16;
+    // extend是scss的继承；inherit是css的继承
+
+    font-family: $font-suisse-bp;
+    // 不让他滚动
+
+}

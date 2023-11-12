@@ -1,0 +1,45 @@
+extends ../base.pug 
+
+block variables 
+  - var template ='detail'
+
+block content 
+  .detail 
+    .detail__wrapper 
+      figure.detail__media    
+        img.detail__media__image(alt=product.data.image.alt src=product.data.image.url)
+
+        .detail__information 
+          p.detail__information__collection=product.data.collection.data.title
+          //- 获取产品文档中的collection字段，这是一个链接字段，.data.title获取该子段中的文档标题
+          //- .data 是用于访问Prismic文档字段值的一种方式。在Prismic中，文档字段通常嵌套在 .data 对象中
+          h1.detail__information__title=product.data.title 
+
+          .detail__information__content
+            .detail__information__highlights  
+              each highlight in product.data.highlights 
+                p.detail__information__highlight 
+                  svg.detail__information__highlight__icon  
+                    use(xlink:href=`sprite-${highlight.highlights_icon.toLowerCase()}`)
+                  
+                  span.detail__information__highlight__text=highlight.highlights_text 
+
+            .detail__information__list 
+              each item in product.data.informations  
+                p.detail__information__item 
+                  strong.detail__information__item__title=item.informations_lable 
+                  span.detail__information__item__description=item.informations_description
+                //- span 是最小的内联元素，通常用于包装短的内联文本片段，没有自己的语义。
+                //- p 是一个块级元素，用于表示段落，它会在文本上下创建间距，更有语义。
+                //- article 是一个更大的块级元素，用于表示完整的、自包含的内容块，拥有更多的语义和信息，例如标题、作者、发布日期等。
+                
+
+
+            a.detail__information__link(href=product.data.link_url.url target="_blank")=product.data.link_text
+            //- target="_blank"就是让你的链接重新开个网页不会覆盖原有的网页
+            
+
+
+
+
+          

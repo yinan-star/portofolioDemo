@@ -1,0 +1,16 @@
+# 设置文件格式，统一代码书写规范
+root=true
+[*]
+# 指示以下配置适应所有文件
+charset=utf-8
+# 就是一种字符编码，可以表示世界上所有的字符，而不会出现乱码的情况
+end_of_line=lf
+# 由于mac系统，所以换行符的适配器是linefeed，Windows是CRLF
+indent_size=2
+# 缩进大小为2空格
+indent_style=space
+# 缩进的样式为空格，有些事tab
+insert_final_newline=true
+# 文件的末尾插入空白行
+trim_trailing_whitespace=true
+# 裁剪掉行尾的尾随空格

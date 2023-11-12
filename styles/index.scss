@@ -1,0 +1,28 @@
+// 文件充当了整个样式表的主入口点,但是好像是需要有顺序的
+@import'./base/reset';
+// 这个放在base的前面，不然放在下面，会被它重置
+@import './utils/variables';
+@import './utils/functions';
+@import './utils/mixins';
+@import './utils/vendors';
+@import './utils/responsive';
+
+@import'./mixins/titles';
+@import'./mixins/descriptions';
+
+
+@import './base/fonts';
+@import './base/base';
+
+@import './components/preloader';
+
+@import './pages/about/about';
+@import './pages/about/content';
+@import './pages/about/gallery';
+@import './pages/about/highlight';
+
+@import './pages/collections/collections';
+
+@import './pages/details/details';
+
+@import './pages/home/home';

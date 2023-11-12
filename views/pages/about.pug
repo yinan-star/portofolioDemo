@@ -1,0 +1,52 @@
+extends ../base.pug 
+
+block variables 
+  - var template ='about'
+
+block content 
+  .about 
+    .about__wrapper 
+      section.about__gallery 
+        .about__gallery__wrapper
+          each media in about.data.gallery
+            figure.about__gallery__media
+              img.about__gallery__media__image(src=media.image.url alt=media.image.alt)
+            //- about.data.galler是你看终端，我把about的body全部打印了，对应的在顶部的gallery是data字段里的元素，所以图片是遍历about.data.gallery
+            //- 然后我在presimic里面做的slice zone领域在终端看的话，都在body里面，所以以下是对slice zone的转译
+      
+      each section in about.data.body 
+        if section.slice_type == 'title'
+          h2.about__title=section.primary.text
+
+        if section.slice_type === 'content'
+          section.about__content
+            .about__content__wrapper 
+              p.about__content__label=section.primary.label 
+
+              .about__content__description!=PrismicDOM.RichText.asHtml(section.primary.description)
+              //- ！号是为了在渲染html时的段落信息（对应presmic的description的所有信息）自动空行
+              //- primary是指这个部分文档的主要字段或内容：比如label, description,imageetc.
+              //- section就是指这个about文档的部分信息
+              figure.about__content__media  
+                img.about__content__media__image(src=section.primary.image.url alt=section.primary.image.alt)
+       
+        if section.slice_type === 'highlight'
+          section.about__highlight
+            .about__highlight__wrapper 
+              if section.primary.label
+                p.about__highlight__label=section.primary.label
+              //- 因为有presmic里面我做了2个label，有一个是没有的，有一个有，所以在这里需要判断下
+              h3.about__highlight__title=section.primary.title
+
+              each media in section.items
+                figure.about__highlight__media
+                  img.about__highlight__media__image(src=media.image.url alt=media.image.alt)
+                //- 按住command和D可以在选中的这段代码，和下行有一样的代码一起选中；记住是从上到下的依次选择。可以一键改名字
+
+        if section.slice_type == 'gallery'
+          section.about__gallery
+            .about__gallery__wrapper
+              each media in section.items
+                figure.about__gallery__media
+                  img.about__gallery__media__image(src=media.image.url alt=media.image.alt)     
+              //- items是你看终端，我把about的body全部打印了，对饮的slice type的gallery里有items字段，所以 是遍历items

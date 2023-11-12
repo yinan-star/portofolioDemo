@@ -1,0 +1,16 @@
+nav.navigation 
+  .navigation__wrapper 
+    a.navigation__link(href="/")=meta.data.title
+      svg.navigation__link__icon 
+    //- href="/"表示链接的目标是网站的根目录，即站点的首页
+    //- meta.data.title是链接Metadata的API的
+    //- 当点击这个title，链接给到home页，作为网站根目录
+
+    ul.navigation__list 
+      each item in navigation.data.list
+        li.navigation__list__item 
+          a.navigation__list__link(href=Link(item.link))=item.text  
+          //- 导航的链接,看presmic里面的navigation里面的字段有个link和text，点击这个text，就转到相对应的link页面
+          //- media和item只是变量名，它们本身没有特殊的含义，所以可以混用
+          //- Link大写是一个方法名或者函数，而link是对象中的一个属性，你的presmic的字段命名是link和text一样。
+          //- 可能在presmic中像Link选择的link，不是直接包含链接的，如果是直接包含链接的一定是直接给了网址域名的，所以在这里用Link调方法

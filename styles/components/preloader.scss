@@ -1,0 +1,25 @@
+// 因为需要多个页面复用，所以放在这里
+.preloader{
+    @extend %cover;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.preloader__text{
+    @extend %title-30;
+    max-width: 66rem;
+
+}
+
+.preloader__number{ 
+
+    position:absolute;
+    bottom: 0;
+    left: 50%;
+    transform:translateX(-50%)
+
+}

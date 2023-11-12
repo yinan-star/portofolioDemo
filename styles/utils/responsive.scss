@@ -1,0 +1,9 @@
+// 倒入响应式布局的插件和设置默认临界值,下面是其他款式设置的链接
+// https://eduardoboucas.github.io/include-media/
+$breakpoints: (
+  'phone': 768px,
+  'tablet': 1024px,
+  'desktop': 1920px,
+) !default;
+
+@import'../../node_modules/include-media/dist/include-media';
