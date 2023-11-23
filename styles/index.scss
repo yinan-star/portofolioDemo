@@ -7,14 +7,17 @@
 @import './utils/vendors';
 @import './utils/responsive';
 
-@import'./mixins/titles';
-@import'./mixins/descriptions';
 
+@import'./mixins/descriptions';
+@import'./mixins/titles';
+@import'./mixins/vertical-titles';
 
 @import './base/fonts';
 @import './base/base';
 
 @import './components/preloader';
+
+@import'./layout/navigation';
 
 @import './pages/about/about';
 @import './pages/about/content';

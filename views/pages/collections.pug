@@ -8,7 +8,8 @@ block content
     .collections__wrapper 
       .collections__titles 
         each collection,index in collections
-          .collections__titles__label=`${home.data.collection} ${Numbers(index)}`
+          .collections__titles__label!=`${home.data.collection}<br>${Numbers(index)}`
+          //- 换行要在等号左边打感叹号（转译），因为，要转换成html
           .collections__titles__title=collection.data.title 
         //- 记得遍历时也要包含数字索引index，不然不会显示数字
 
@@ -22,8 +23,19 @@ block content
                   //- 看Presmic的Collection的版式去理解嵌套关系
 
       .collections__content 
-        each collection in collections 
-          article.collections__article 
+        each collection,index in collections 
+          article.collections__article(class=`${index === 0 ? 'collections__article--active' : ''}`) 
+            //- "==="它不仅比较值是否相等，还要比较它们的类型是否相同.
+            //- 初始时是不可见的。然后，通过添加 .collections__article--active 类，该元素的透明度变为 1，从而使其可见。在提供的代码中，这个类在 index 为 0 时被添加，因此只有第一个元素（index === 0）会具有可见的透明度。其他元素将保持不可见状态。
             h2.collections__article__title=`${collection.data.title } ${home.data.collection}`
-            p.collections__article__description=collection.data.description 
+            p.collections__article__description!=collection.data.description.replace(/\n/g, '<br>') 
+      
+      .collections__mobile 
+        each collection,index in collections 
+          .collections__mobile__item
+            .collections__mobile__item__label!=`${home.data.collection}<br>${Numbers(index)}`
+            //- 换行要在等号左边打感叹号（转译），因为，要转换成html
+            .collections__mobile__item__title=collection.data.title 
+            //- 记得遍历时也要包含数字索引index，不然不会显示数字
+
 

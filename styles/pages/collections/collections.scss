@@ -1,57 +1,140 @@
+.collections{
+    @extend %cover;
+
+    background: $color-quicksand;
+    color: $color-quarter-spanish-white;
+}
+
 .collections__wrapper{
+    @extend %cover;
+    overflow: hidden;
+    // 让他上下没有东西，所以会滑不动
 
 }
 
 .collections__titles{
-
+   @extend %vertical-titles;
+   @include media('<phone'){
+    display: none;
+  }
 }
 
 .collections__titles__label{
-
+  @extend %vertical-titles__label;
 }
 
 .collections__titles__title{
-
+  @extend  %vertical-titles__title;
 }
 
 .collections__gallery{
-
+  @extend %cover;
 }
 
 .collections__gallery__wrapper{
+  align-items: center;
+  // 交叉轴对齐
+  display: flex;
+  // 挨着不换行
+  position: absolute;
+  // 移出当前文档流，自成一派
+  top: 50%;
+  transform: translateY(-50%);
+  // wrapper包含很多个link,每个link包含一个media,每个media里面有一张图，media是这张图的容器，相当于蒙版裁切一些尺寸。
 
 }
 
 .collections__gallery__link{
+  // display: block;
+  margin: 0 5.3rem;
 
 }
 
 .collections__gallery__media{
+  position: relative;
+  width: 44.7rem;
+  height: 63.1rem;
+  // 设置这个蒙版的宽度和高度，并且相对于父级，是relative的，占据父级的文档流里，而image是会充满这个蒙版
 
 }
 
 .collections__gallery__media__image{
+  @extend %cover;
+  object-fit: cover;
 
 }
 
 .collections__content{
+  @extend %cover;
+
+  @include media('<phone'){
+    display: none;
+  }
 
 }
 
 .collections__article{
+  position: absolute;
+  left: 8rem;
+  bottom: 5rem;
+  opacity: 0;
+
+  &--active{
+    opacity: 1;
+  }
+  // 初始时是不可见的。然后，通过添加 .collections__article--active 类，该元素的透明度变为 1，从而使其可见。这个类在 index 为 0 时被添加，因此只有第一个元素（index === 0）会具有可见的透明度。其他元素将保持不可见状态。
 
 }
 
 .collections__article__title{
+  @extend %title-60;
 
 }
 
 .collections__article__description{
+  @extend %description-16;
+  max-width: 44rem;
+  line-height: 1.5;
 
 
-    
+
 }
 // 只留下css类的选择器：.collections__wrapper {
 //   width: 100%;
 //   background-color: #f0f0f0;
 // }
+
+// 因为移动端的设计与桌面端非常不同，所以重新建容器重新添加.pug和修改scss。那么不需要在prismic里在加载文档了？
+.collections__mobile{
+  display: none;
+  // 子元素水平排列，如果没有进行特殊的定位或布局设置，元素的默认位置是在页面的左上角。
+  position: absolute;
+  bottom: 5rem;
+  // 相对于其父容器进行绝对定位，并将其底部与父容器的底部相距 5 个单位的距离。
+  @include media('<phone') {
+    display: flex;
+  }
+
+}
+
+.collections__mobile__item{
+  width:100vw;
+  // 就是横跨屏幕 的宽度
+  padding-left: 5rem;
+  // 并且左内边距是5；
+
+}
+
+.collections__mobile__item__label{
+  font-size: 2rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+
+}
+
+.collections__mobile__item__title{
+  font-size: 12rem;
+  font-family: $font-george-x;
+
+}
+// 因为是重新写的，所以最好不要继承之前的东西，不然会怕break 

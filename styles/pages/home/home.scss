@@ -1,5 +1,38 @@
 
 .home{
+    @extend %cover;
+    @extend %center;
+  
+    background: $color-contessa;
+    color: $color-quarter-spanish-white;
+    text-align: center;
+    overflow: hidden;
+// 不准备鼠标往下滑动
+    // display: flex;
+
+    &:before,
+    &:after{
+        content: '';
+        height: 24rem;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    }
+
+    &:before{
+        background: linear-gradient(to bottom, $color-contessa 0%,rgba($color-contessa,0) 100%);
+
+        // 0%和100%是渐变色滑块上的起始点和结束点。
+        top:0;
+
+    }
+    &:after{
+        background: linear-gradient(to top, $color-contessa 0%,rgba($color-contessa,0) 100%);
+        // 0%和100%是渐变色滑块上的起始点和结束点。
+        bottom: 0;
+
+    }
 
 }
 
@@ -7,23 +40,29 @@
 
 }
 
-.home__titles {
+.home__titles{
+    @extend %vertical-titles;
+ }
+ 
+ .home__titles__label{
+   @extend %vertical-titles__label;
+ }
+ 
+ .home__titles__title{
+   @extend  %vertical-titles__title;
+ }
 
-}
-
-.home__titles__label{
-
-}
-
-.home__titles__title{
-
-}
 
 .home__gallery{
+    @extend %cover;
+    height: 172.5rem;
+    width: 241.8rem;
+    visibility: hidden;
 
 }
 
 .home__gallery__media {
+    position: absolute;
 
 }
 
@@ -32,9 +71,32 @@
 }
 
 .home__link{
-   
+  @extend %description-14;
+  align-items: center;
+  bottom: 5rem;
+  display: flex;
+  height: 6rem;
+  justify-content: center;
+  left: 50%;
+  letter-spacing: 0.05;
+  position: absolute;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  width: 28.8rem;
+  z-index: 2;
+    //   因为要在渐变色之上
     
+    // 移除文档流，让他不要再wrapper里
+  @include media('<phone'){
+    height: 13.7rem;
+    width: 55rem;
+    bottom: 7.5rem;
+  }
 
+}
+
+.home__link__icon{
+    @extend %cover;
 }
 
 // 当我需要把格式缩进一致时，按住shift+Tab键就可以左对齐了

@@ -1,11 +1,10 @@
 // 这个文档就是设置一些颜色字体等变量？
 $color-black: #000;
-// $color-bright-grey: #37384c;
-// $color-cadet-blue: #b2b8c3;
-// $color-contessa: #c97164;
-// $color-quarter-spanish-white: #f9f1e7;
-// $color-quicksand: #bc978c;
-$color-white: #fff;
+$color-bright-grey: #37384c;
+$color-cadet-blue: #b2b8c3;
+$color-contessa: #c97164;
+$color-quarter-spanish-white: #f9f1e7;
+$color-quicksand: #bc978c;
 
 $font-george-x: 'George X';
 $font-suisse-bp: 'Suisse BP';
@@ -13,4 +12,5 @@ $font-suisse-bp: 'Suisse BP';
 // $ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 $ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 
-$z-indexes: ( 'navigation', 'content');
+$z-indexes: ('preloader', 'navigation', 'content');
+// 最顶层的顺序navigation-->content-->其他元素、页面

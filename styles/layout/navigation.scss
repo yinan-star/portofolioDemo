@@ -1,17 +1,38 @@
 //  navigation 在项目中被视为整个布局的一部分，而不仅仅是一个单独的通用组件
 .navigation {
-
-}
-
-.navigation__wrapper {
+    @extend %cover;
+    z-index: z('navigation');
+    // 调用Z函数，使navigation置顶
+    color: $color-quarter-spanish-white;
+    position: fixed;
+    pointer-events: none;
+    // 整个导航区域都不会响应鼠标事件
 
 }
 
 .navigation__link {
-
+    font-size: 0;
+    height: 2rem;
+    width: 12.8;
+    top: 4rem;
+    left: 4rem;
+    position: absolute;
+    pointer-events: auto;
+    // 子元素设置了，就会相应增加
+   
 }
 
 .navigation__link__icon {
+    display: block;
+    // 因为要match the link，独占一行？
+    width: 15rem;
+    @include media('<phone') {
+        height: 4.3rem;
+        left: 5rem;
+        top: 5rem;
+        width: 27.9rem;
+    }
+    
 
 }
 
@@ -20,9 +41,19 @@
 }
 
 .navigation__list__item {
+    // 就是右上角的collection和about链接,就是个容器
+    position: absolute;
+    right: 4rem;
+    top: 4rem;
+    pointer-events: auto;
 
 }
 
 .navigation__list__link {
+    // 真实的文字链接
+    @extend %title-30;
+
+    display: block;
+    line-height: 1;
 
 }

@@ -1,4 +1,6 @@
 .about{
+  background: $color-cadet-blue;
+  color: $color-bright-grey;
 
 }
 
@@ -7,6 +9,17 @@
 }
 
 .about__title{
+  @extend %title-100;
+
+  margin: auto;
+  max-width: 126rem;
+  text-align: center;
+  line-height: 1.2;
+
+  @include media('<phone') {
+    max-width: 67.7rem;
+  }
+  // 就是那个大字的最大宽度
   
 }
 

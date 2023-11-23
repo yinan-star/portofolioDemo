@@ -1,25 +1,33 @@
 // 因为需要多个页面复用，所以放在这里
 .preloader{
-    @extend %cover;
+  @extend %cover;
+  @extend %center;
 
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  background: $color-contessa;
+  color: $color-quarter-spanish-white;
+  text-align: center;
+  display: none;
+  z-index: z('preloader');
 
 }
 
 .preloader__text{
-    @extend %title-30;
+    @extend %title-53;
     max-width: 66rem;
+    line-height: 1;
 
 }
 
 .preloader__number{ 
-
+    @extend %description-14;
     position:absolute;
-    bottom: 0;
+    bottom: 7.3rem;
     left: 50%;
-    transform:translateX(-50%)
+    transform:translateX(-50%);
+
+    @include media('<phone') {
+      font-size: 3rem;
+    }
+
 
 }

@@ -1,23 +1,136 @@
 .about__highlight{
+    margin: 20rem 0; 
+    &:first-child {
+        margin-top: 0;
+    }
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
 
 }
 
 .about__highlight__wrapper{
+    height: 104rem;
+    position: relative;
+    width: 144rem;
+    margin: auto;
+    // 他好像涉及两个第一个是第四个位置的highlight,第二个是在最后的位置的highlight
+    .about__highlight:nth-child(4) & {
+        width: 104rem;
+      }
+
+    @include media('<=phone') {
+        height: 316.2rem;
+        width: 100%;
+    
+        .about__highlight:nth-child(4) & {
+          height: 119.3rem;
+          width: 100%;
+        //  因为第四个的highlight特殊设置了高度所以不会是316
+        }
+
+
+    }
 
 }
 
 .about__highlight__label{
+    @extend %description-12;
+
+    position: absolute;
+    left: 50%;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    text-transform: uppercase;
+    top: 6rem;
+    transform: translateX(-50%);
+    width: 11rem;
+
+    @include media('<=phone') {
+        // 因为在pug里设置了有label 和无label所以，在这里不用担心第四个和最后一个highlight相互影响
+        font-size: 2.4rem;
+        width: 20rem;
+        margin-top: 2rem;
+        // 就算移除文档流也可以和兄弟容器做间距
+        top: 90rem;
+        // 绝对元素用top;相对元素或兄弟元素用margin;
+        // absolute移除了文档流，它被一出来做单独容器了；
+
+    }
+
+
 
 }
 
 .about__highlight__title{
+    @extend %title-200;
+    transform: translate(-50%,-50%) rotate(-90deg);
+    // 默认坐标原点（坐标系统的起点）通常是元素的左上角。左上角移动是负，右下角移动是正。因为原点是元素左上角，所以要向左上方移动，才能对齐父级容器的中心点
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    padding-bottom: 4rem;
+    // 因为字体旋转了，所以底部在右边
 
+    @include media('<=phone') {
+        font-size: 30rem;
+        margin-top: 6.5rem;
+      }
+    // 因为设计上，只有highlight的title是20-->30;所以在这里单独写就好不用去tittle.scss里改
 }
 
 .about__highlight__media{
+    height: 76rem;
+    position: absolute;
+    // 图片要移出文档流，因为底部有字体
+    width: 54rem;
+
+    .about__highlight:nth-child(4) & {
+        height: 52.8rem;
+        width: 36rem;
+      }
+    // 因为highlightwrapper里面有很多个child，他是第四个，前面有，gallery、title\content.这个图片的大小会小些
+
+    &:first-child {
+        left: 0;
+        top: 0;
+      }
+    
+    &:last-child {
+        bottom: 0;
+        right: 0;
+      }
+    
+    @include media('<=phone'){
+        .about__highlight:nth-child(10) & {
+            height: 76rem;
+            width: 54rem;
+
+            &:first-child {
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+              }
+            
+            &:last-child {
+                bottom: 0;
+                right: 50%;
+                transform: translateX(50%);
+
+              }
+
+
+        }
+
+    }
+
 
 }
 
 .about__highlight__media__image{
+    @extend %cover;
+    object-fit: cover;
+
   
 }

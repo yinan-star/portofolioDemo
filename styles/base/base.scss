@@ -1,8 +1,50 @@
-body{
-    @extend %description-16;
-    // extend是scss的继承；inherit是css的继承
-
-    font-family: $font-suisse-bp;
-    // 不让他滚动
-
+// 如果每个页面的问题都相同，比如东西都很大，就找这个base代码的东西，因为，这是通用的scss
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  user-select: none;
 }
+
+html {
+  @extend %cover;
+  font-size: calc(100vw / 1920px * 10px);
+
+//   background: $color-contessa;
+//   color: $color-quarter-spanish-white;
+//   overflow: hidden;
+//   position: fixed;
+
+  @include media('<phone') {
+    font-size: calc(100vw / 750 * 10);
+  }
+  // 移动端的基建
+}
+
+body {
+  @extend %cover;
+  // 充满视口
+  @extend %description-16;
+
+  font-family: $font-suisse-bp;
+  // position: fixed;
+}
+
+a {
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}
+
+button{
+  background: none;
+  color: inherit;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+img {
+  vertical-align: middle;
+}
+
