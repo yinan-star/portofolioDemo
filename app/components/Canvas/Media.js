@@ -5,11 +5,12 @@ import fragment from 'shaders/plane-fragment.glsl';
 import vertex from 'shaders/plane-vertex.glsl';
 
 export default class {
-  constructor({ element, geometry, gl, scene }) {
+  constructor({ element, geometry, gl, index, scene }) {
     this.element = element
     this.gl = gl;
     this.geometry=geometry
     this.scene=scene
+    this.index =index
     // 上面的elment都是需要复用的所以在这里初始化
 
     this.createTexture()
@@ -18,10 +19,9 @@ export default class {
   }
   createTexture() {
     this.texture = new Texture(this.gl);
-    
-    console.log(this.element)
 
     this.image = new Image();
+    this.image.crossOrigin = 'anonymous';
     this.image.src = this.element.getAttribute('data-src');
     this.image.onload = () => (this.texture.image = this.image);
 
@@ -34,7 +34,7 @@ export default class {
       fragment,
       vertex,
       uniforms: {
-        //   tMap: { value: this.texture },
+          tMap: { value: this.texture },
       },
     });
 
@@ -45,5 +45,6 @@ export default class {
       program:this.program
     })
     this.mesh.setParent(this.scene)
+    this.mesh.position.x += this.index * this.mesh.scale.x;
   }
 }
