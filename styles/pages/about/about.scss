@@ -1,6 +1,8 @@
 .about{
-  background: $color-cadet-blue;
-  color: $color-bright-grey;
+  @extend %page;
+
+  // background: $color-cadet-blue;
+  // color: $color-bright-grey;
 
 }
 

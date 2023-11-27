@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'dev'
 
@@ -23,7 +24,7 @@ module.exports = {
         modules: [
             dirApp,
             dirShared,
-            dirStyles, 
+            dirStyles,
             dirNode
         ]
     },
@@ -48,7 +49,7 @@ module.exports = {
             chunkFilename: '[id].css'
         }),
 
-        
+
     ],
 
 
@@ -72,36 +73,59 @@ module.exports = {
                         }
                     },
                     {
-                        loader:'css-loader',//处理css后缀的文件，转换成网页理解的css
+                        loader: 'css-loader',//处理css后缀的文件，转换成网页理解的css
                     },
                     {
-                        loader:'postcss-loader',
+                        loader: 'postcss-loader',
                         //不同浏览器对某些CSS属性要求添加不同的前缀（如 -webkit-、-moz- 等），
                         // 那么postcss-loader可以帮你自动添加这些前缀，以确保跨浏览器的兼容性。
                     },
                     {
-                        loader:'sass-loader'//处理由更高级的sass语言编写的文件，转换成网页理解的css
+                        loader: 'sass-loader'//处理由更高级的sass语言编写的文件，转换成网页理解的css
                     }
                 ]
             },
             {
-                test:/\.(jpe?g|png|gif|svg|woff2?|fnt|webp)$/,
-                
-                use:[
-                    {
-                        loader:'file-loader',
-                        options:{
-                           outputPath:'images', //想复制到public里面的整个images的文件夹             
-                           name(file){
-                            // 在public文件夹中保存相同的名字而不是一串字符，如果你想保存哈希值，也是可以。
-                            return'[hash].[ext]'
-                           }
-                        },
+                test: /\.(png|jpg|gif|jpe?g|svg|woff2?|fnt|webp|mp4)$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: '[name].[hash].[ext]',
+                },
 
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                use: [
+                    {
+                        loader: ImageMinimizerPlugin.loader,
+                        options: {
+                            minimizer: {
+                                implementation: ImageMinimizerPlugin.imageminMinify,
+                                options: {
+                                    plugins: ['imagemin-gifsicle'],
+                                },
+                            },
+                        },
                     },
                 ],
-               
-            }
+            },
+            {
+                test: /\.(glsl|frag|vert)$/,
+                loader: 'raw-loader',
+                exclude: /node_modules/,
+            },
+
+            {
+                test: /\.(glsl|frag|vert)$/,
+                loader: 'glslify-loader',
+                exclude: /node_modules/,
+            },
+
         ]
-    }
+    },
+
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin()],
+    },
 }

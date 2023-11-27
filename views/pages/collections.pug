@@ -4,7 +4,7 @@ block variables
   - var template ='collections'
 
 block content 
-  .collections  
+  .collections(data-background="#bc978c" data-color="#F9F1E7")
     .collections__wrapper 
       .collections__titles 
         each collection,index in collections
@@ -19,7 +19,7 @@ block content
             each product in collection.data.products
               a.collections__gallery__link(href=Link(product.products_product))
                 figure.collections__gallery__media
-                  img.collections__gallery__media__image(src=product.products_product.data.image.url alt=product.products_product.data.image.alt)
+                  img.collections__gallery__media__image(data-src=product.products_product.data.image.url alt=product.products_product.data.image.alt)
                   //- 看Presmic的Collection的版式去理解嵌套关系
 
       .collections__content 

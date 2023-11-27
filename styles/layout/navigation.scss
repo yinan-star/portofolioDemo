@@ -19,6 +19,12 @@
     position: absolute;
     pointer-events: auto;
     // 子元素设置了，就会相应增加
+    // 现做动画，Floema的透明动画
+    transition: opacity 0.4s ease;
+
+    &:hover{
+        opacity: 0.5;
+    }
    
 }
 
@@ -52,6 +58,8 @@
 .navigation__list__link {
     // 真实的文字链接
     @extend %title-30;
+    @extend %link--hidden;
+    // 动态的下划线
 
     display: block;
     line-height: 1;
