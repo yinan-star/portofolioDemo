@@ -1,0 +1,23 @@
+/*! ./components/Navigation */
+
+/*! ./pages/About/About */
+
+/*! ./pages/Collections/Collections */
+
+/*! ./pages/Detail/Detail */
+
+/*! ./pages/Home/Home */
+
+/*! components/Canvas */
+
+/*! components/Preloader */
+
+/*! lodash/each */
+
+/*!**********************!*\
+  !*** ./app/index.js ***!
+  \**********************/
+
+/*!****************************************!*\
+  !*** ./app/components/Canvas/index.js ***!
+  \****************************************/

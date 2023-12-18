@@ -24,6 +24,7 @@ block content
               .about__content__box
                 p.about__content__label(data-animation="label")=section.primary.label 
                 .about__content__description(data-animation="paragraph")!=PrismicDOM.RichText.asHtml(section.primary.description).replace(/'<p>'/g, '<p data-animation="paragraph">')
+
               //- ！号是为了在渲染html时的段落信息（对应presmic的description的所有信息）自动空行
               //- primary是指这个部分文档的主要字段或内容：比如label, description,imageetc.
               //- section就是指这个about文档的部分信息

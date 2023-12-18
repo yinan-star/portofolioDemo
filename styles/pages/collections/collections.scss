@@ -3,6 +3,7 @@
 
     // background: $color-quicksand;
     // color: $color-quarter-spanish-white;
+    z-index: 0;
 }
 
 .collections__wrapper{
@@ -14,6 +15,9 @@
 
 .collections__titles{
    @extend %vertical-titles;
+
+   transition: transform 1s ease;
+
    @include media('<phone'){
     display: none;
   }
@@ -29,6 +33,7 @@
 
 .collections__gallery{
   @extend %cover;
+  z-index: 1;
 }
 
 .collections__gallery__wrapper{
@@ -39,14 +44,23 @@
   position: absolute;
   // 移出当前文档流，自成一派
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-44.7rem * 0.5, -50%);
   // wrapper包含很多个link,每个link包含一个media,每个media里面有一张图，media是这张图的容器，相当于蒙版裁切一些尺寸。
+  left: 50%;
+  // 因为第一个产品要从窗口的中心开始展示，这个容器，是把X移动中心但是要加上哪个图片容器的一半才行。
 
 }
 
 .collections__gallery__link{
-  // display: block;
+  display: block;
   margin: 0 5.3rem;
+
+  &:first-child{
+    margin-left: 0;
+  }
+  &:last-child{
+    margin-right: 0;
+  }
 
 }
 
@@ -55,6 +69,8 @@
   width: 44.7rem;
   height: 63.1rem;
   // 设置这个蒙版的宽度和高度，并且相对于父级，是relative的，占据父级的文档流里，而image是会充满这个蒙版
+  visibility: hidden;
+  // 因为是用webGl匹配的图而不是DOM
 
 }
 
@@ -76,11 +92,14 @@
 .collections__article{
   position: absolute;
   left: 8rem;
-  bottom: 5rem;
+  bottom: 8rem;
   opacity: 0;
+  transition: opacity 0.4s ease;
 
   &--active{
     opacity: 1;
+    transition-delay: 0.4s
+    // 当图片滑动到位时，激活左下角的文字部分的动画
   }
   // 初始时是不可见的。然后，通过添加 .collections__article--active 类，该元素的透明度变为 1，从而使其可见。这个类在 index 为 0 时被添加，因此只有第一个元素（index === 0）会具有可见的透明度。其他元素将保持不可见状态。
 
@@ -138,3 +157,14 @@
 
 }
 // 因为是重新写的，所以最好不要继承之前的东西，不然会怕break 
+
+.collections__button{
+  left:50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44.7rem;
+  height: 63.1rem;
+  // 这个虚假的按钮match 图片的宽宽高
+
+}

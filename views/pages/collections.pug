@@ -13,12 +13,24 @@ block content
           .collections__titles__title=collection.data.title 
         //- 记得遍历时也要包含数字索引index，不然不会显示数字
 
+        each collection,index in collections
+          .collections__titles__label!=`${home.data.collection}<br>${Numbers(index)}`
+          //- 换行要在等号左边打感叹号（转译），因为，要转换成html
+          .collections__titles__title=collection.data.title 
+        //- 记得遍历时也要包含数字索引index，不然不会显示数字
+
+        each collection,index in collections
+          .collections__titles__label!=`${home.data.collection}<br>${Numbers(index)}`
+          //- 换行要在等号左边打感叹号（转译），因为，要转换成html
+          .collections__titles__title=collection.data.title 
+        //- 记得遍历时也要包含数字索引index，不然不会显示数字
+
       .collections__gallery 
         .collections__gallery__wrapper 
-          each collection in collections   
+          each collection, index in collections   
             each product in collection.data.products
               a.collections__gallery__link(href=Link(product.products_product))
-                figure.collections__gallery__media
+                figure.collections__gallery__media(data-index=index)
                   img.collections__gallery__media__image(data-src=product.products_product.data.image.url alt=product.products_product.data.image.alt)
                   //- 看Presmic的Collection的版式去理解嵌套关系
 
@@ -37,5 +49,6 @@ block content
             //- 换行要在等号左边打感叹号（转译），因为，要转换成html
             .collections__mobile__item__title=collection.data.title 
             //- 记得遍历时也要包含数字索引index，不然不会显示数字
+
 
 

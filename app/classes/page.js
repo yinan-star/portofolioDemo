@@ -1,6 +1,5 @@
 // 管理网页中的特定页面的动画、元素和交互效果
 import GSAP from 'gsap'
-import NormalizeWheel from 'normalize-wheel'
 import Prefix from 'prefix'
 
 import each from 'lodash/each'
@@ -36,7 +35,6 @@ export default class Page {
 
     this.id = id
     this.transformPrefix = Prefix('transform')
-    this.onMousewheelEvent=this.onMousewheel.bind(this)
 
   }
 
@@ -168,12 +166,6 @@ export default class Page {
   }
 
 // Events
-  onMousewheel(event) {
-    const {pixelY} = NormalizeWheel(event);
-    this.scroll.target += pixelY; //TIP normalized wheel
-    
-    // normalize后，鼠标的移动滚滑的程度在每个page应该是一样的
-  }
 
   onResize() {
     if (this.elements.wrapper) {
@@ -181,6 +173,13 @@ export default class Page {
     }
     each(this.animations, (animation) => animation.onResize());
     // 是上面说的animations这个整个数组（titles,paragraphs,labels.etc..
+  }
+
+  onWheel({pixelY}) {
+
+    this.scroll.target += pixelY; //TIP normalized wheel
+    
+    // normalize后，鼠标的移动滚滑的程度在每个page应该是一样的
   }
 
 
@@ -211,11 +210,11 @@ export default class Page {
   }
 // Listeners
   addEventListeners() {
-    window.addEventListener('mousewheel', this.onMousewheel.bind(this));
+
   }
 
   removeEventListeners() {
-    window.removeEventListener('mousewheel', this.onMousewheel.bind(this));
+   
   }
 // Destroy
   destroy(){
