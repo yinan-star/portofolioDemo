@@ -15,10 +15,6 @@ export default class {
     this.index = index;
     // 上面的elment都是需要复用的所以在这里初始化
 
-    this.createTexture();
-    this.createProgram();
-    this.createMesh();
-
     this.extra = {
       x: 0,
       y: 0
@@ -30,6 +26,14 @@ export default class {
       lerp: 0.1,
       multiplier: 0
     }
+
+    this.createTexture();
+    this.createProgram();
+    this.createMesh();
+    this.createBounds({
+      sizes: this.sizes
+    });
+
   }
   createTexture() {
     // 在shader里面做的渐变
@@ -77,9 +81,9 @@ export default class {
     // 初始化sizes，让他变成下面可以重复利用的属性
     this.bounds = this.element.getBoundingClientRect()
 
-    this.upadteScale()
-    this.upadteX()
-    this.upadteY()
+    this.updateScale()
+    this.updateX()
+    // this.updateY()
   }
 
   // Animations.
@@ -104,13 +108,13 @@ export default class {
       y: 0
     }
     this.createBounds(sizes)
-    this.upadteX(scroll && scroll.x)
-    this.upadteY(scroll && scroll.y)
+    this.updateX(scroll && scroll.x)
+    // this.updateY(scroll && scroll.y)
 
   }
 
   // Loop
-  upadteScale() {
+  updateScale() {
     this.height = this.bounds.height / window.innerHeight
     this.width = this.bounds.width / window.innerWidth
 
@@ -121,30 +125,44 @@ export default class {
 
   }
 
-  upadteX(x = 0) {
+  updateX(x = 0) {
     this.x = (this.bounds.left + x) / window.innerWidth
     this.mesh.position.x = (-this.sizes.width / 2) + (this.mesh.scale.x / 2) + (this.x * this.sizes.width) + this.extra.x
     // width和height是视窗的宽高。也就是mesh的position的原点在视窗口的正中心
     // -width / 2 这个部分就是将所有mesh的原点position移到视窗的左上角
   }
 
-  upadteY(y = 0) {
-    this.y = (this.bounds.top + y) / window.innerHeight
-    this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height) + this.extra.y
-    // 这个x是之前在index里设置的鼠标拖动的当前的x,y的距离。所以，想移动匹配好的图片，需要在整个容器加上鼠标x,y移动的距离
-  }
 
+  // collections的一系列图片的图画
   update(scroll, index) {
-    if (!this.bounds) return
-    this.upadteX(scroll)
-    this.upadteY()
+    this.updateX(scroll);
 
-    this.program.uniforms.uAlpha.value = this.opacity.multiplier
+    const amplitude = 0.1;
+    // 振幅:波的强度和大小
+    const frequency = 1;
+    // 频率:周期次数,代表user的互动速度.
+
+    this.mesh.rotation.z = -0.02 * Math.PI * Math.sin(this.index / frequency);
+    // 用index和frequency来做旋转角度的技术
+    // 当输入为0时，正弦函数的值为0，而余弦函数的值为1
+    // -.02是最终计算出的旋转角度的范围或幅度
+    // Math.PI从弧度转换为角度
+    this.mesh.position.y = amplitude * Math.sin(this.index / frequency);
+    // doing a rotation and simple sine wave.
 
 
+    this.opacity.target = index === this.index ? 1 : 0.4;
+    // 判断是不是当前的图片,如果是就设置透明度为1,不是设置为40%
+    this.opacity.current = GSAP.utils.interpolate(
+      this.opacity.current,
+      this.opacity.target,
+      this.opacity.lerp
+    );
+    // 从当前到目标,形成透明度设置循环
+
+    // this.program.uniforms.uAlpha.value = this.opacity.multiplier;
+    this.program.uniforms.uAlpha.value = this.opacity.multiplier * this.opacity.current;
   }
-
-
 
 
 }

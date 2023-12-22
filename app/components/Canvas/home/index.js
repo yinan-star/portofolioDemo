@@ -49,6 +49,7 @@ export default class {
 
     this.createGeometry();
     this.createGallery();
+    this.onResize({sizes: this.sizes});
 
 
     this.group.setParent(this.scene);
@@ -138,9 +139,6 @@ export default class {
 
   // Update
   update() {
-    if (!this.galleryBounds) return
-
-
     this.scroll.x = this.x.current
     this.scroll.y = this.y.current
 

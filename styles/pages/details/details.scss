@@ -1,16 +1,13 @@
-.detail{
-    @extend %center;
+.detail {
     @extend %page;
-
-    // background: $color-quicksand;
-    // color: $color-quarter-spanish-white;
-
+    @extend %center;
+   
     @include media('<phone') {
         height: auto;
-      }
+    }
 }
 
-.detail__wrapper{
+.detail__wrapper {
     align-items: center;
     // 子元素在交叉轴上居中对齐（如果子元素是横着排的，那么就是一起垂直居中，在design设计稿里左边是图片，右边是文字，他们是垂直居中在整个页面中间）
     display: flex;
@@ -20,14 +17,14 @@
     @include media('<phone') {
         display: block;
         margin: auto;
-        padding: 15rem 0 31.5rem;
+        padding: 16rem 0 31.5rem;
         // 容器的那边句上下31.5，左右0；
         width: 66.1rem;
-      }
+    }
 
 }
 
-.detail__media{
+.detail__media {
     height: 78.2rem;
     position: relative;
     // 该容器内的子元素需要使用绝对定位，并且相对于 .detail__media 容器进行定位.所以image调用了cover：会充满该容器
@@ -35,21 +32,21 @@
     width: 55.4rem;
 
     @include media('<phone') {
-    height: 93.4rem;
-    margin: 0 auto 7.8rem;
-    width: 100%;
+        height: 88.4rem;
+        margin: 0 auto 7.8rem;
+        width: 61.1rem;
     }
 
 }
 
-.detail__media__image{
+.detail__media__image {
     @extend %cover;
     // 脱离文档流，只充满它的父级容器.detail_media。因为用了position:absolute
     object-fit: cover;
 }
 
 
-.detail__information{
+.detail__information {
     padding-left: 8.2rem;
 
     @include media('<phone') {
@@ -59,14 +56,14 @@
 
 }
 
-.detail__information__collection{
+.detail__information__collection {
     @extend %description-12;
     text-transform: uppercase;
     margin-bottom: 4rem;
 
 }
 
-.detail__information__title{
+.detail__information__title {
     @extend %title-120;
 
     max-width: 60rem;
@@ -74,8 +71,9 @@
 
 }
 
-.detail__information__content{
+.detail__information__content {
     padding-left: 18rem;
+
     // 注意想象在.pug里面的层级关系这个呆在imformation里的
     @include media('<phone') {
         padding-left: 0;
@@ -85,27 +83,28 @@
 
 }
 
-.detail__information__highlights{
-    
+.detail__information__highlights {
+
     margin-top: 6rem;
     // padding 是影响元素内部，而 margin 是影响元素外部
 
 }
 
-.detail__information__highlight{
+.detail__information__highlight {
     align-items: center;
     // 因为highlight在水平方向上，包含一个icon和一句话，所以他们要在垂直方向上居中在页面中间
     display: flex;
 
     &:not(:first-child) {
         margin-top: 4rem;
-      }
+    }
+
     // 不是第一个小孩的其他小孩的顶部间距都是4rem
 
 }
 
-.detail__information__highlight__icon{
-    width:4rem;
+.detail__information__highlight__icon {
+    width: 4rem;
     height: 4rem;
     // border: 1px solid currentColor;
     border-radius: 50%;
@@ -115,35 +114,36 @@
         height: 9.2rem;
         margin-right: 5.8rem;
         width: 9.2rem;
-      }
+    }
 
 }
 
-.detail__information__highlight__text{
+.detail__information__highlight__text {
     @extend %description-16;
 
 }
 
-.detail__information__list{
+.detail__information__list {
     margin-top: 4rem;
     // 距离上面的highlight兄弟容器4rem，list容器包含两个item
 
 }
 
-.detail__information__item{
+.detail__information__item {
     // align-items: center;
     // 不要在交叉轴上对齐，因为title希望和description顶部对齐
     display: flex;
     // 包含一个label一个description，他们要垂直对齐
 
-    &:not(:first-child){
+    &:not(:first-child) {
         margin-top: 4rem;
     }
+
     // 对于除了第一个子元素之外的每个 .detail__information__item 元素，都应用 margin-top: 4rem;，从而在垂直方向上创建一些间距。这样，除了第一个子元素之外的每个子元素都会与其上面的兄弟元素之间有 4rem 的垂直间距。
 
 }
 
-.detail__information__item__title{
+.detail__information__item__title {
     @extend %description-12;
     width: 10rem;
     padding-right: 2.5rem;
@@ -155,19 +155,20 @@
 
 }
 
-.detail__information__item__description{
+.detail__information__item__description {
     @extend %description-16;
     max-width: 44rem;
     letter-spacing: 0.03rem;
 
 }
 
-.detail__information__link{
+.detail__information__link {
     // 就是shop it
     @extend %title-30;
     margin-top: 3rem;
     // 距离兄弟容器3rem
     display: inline-block;
+
     // 允许元素像行内元素一样在同一行内显示，同时又可以设置宽度、高度等属性，表现得像块级元素一样。就是圆圈里面套字体
     @include media('<phone') {
         margin-top: 5rem;
@@ -175,7 +176,7 @@
 
 }
 
-.detail__button{
+.detail__button {
     @extend %description-14;
     bottom: 5rem;
     height: 6rem;
@@ -197,7 +198,7 @@
 
 }
 
-.detail__button__icon{
+.detail__button__icon {
     @extend %cover;
 
 }

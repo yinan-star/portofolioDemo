@@ -17,6 +17,8 @@ const port = process.env.PORT || 3000;
 
 const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom');
+const UAParser = require('ua-parser-js');
+
 
 // 将 PrismicDOM 设置为本地变量，使其在 Pug 模板中可用
 app.locals.PrismicDOM = PrismicDOM;
@@ -67,6 +69,15 @@ const handleLinkResolver = (doc) => {
 
 //Middleware to add prismic content
 app.use((req, res, next) => {
+  const ua = UAParser(req.headers['user-agent']);
+
+  res.locals.isDesktop = ua.device.type === undefined;
+  res.locals.isPhone = ua.device.type === 'mobile';
+  res.locals.isTablet = ua.device.type === 'tablet';
+
+  console.log(res.locals.isDesktop, res.locals.isPhone, res.locals.isTablet)
+
+  // 移动端的,手机端的
   res.locals.ctx = {
     endpoint: process.env.PRISMIC_ENDPOINT,
     linkResolver: handleLinkResolver,

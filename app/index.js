@@ -79,7 +79,15 @@ class App {
     // 销毁-重新定义尺寸-页面展示
   }
 
-  async onChange(url) {// 同步html里的url链接，使得在check时不会看到没有更新的content名字
+  onPopState() {
+    this.onChange({
+      url: window.location.pathname,
+      push: false
+    })
+  }
+  // 浏览器返回键起作用
+
+  async onChange({ url, push=true }) {// 同步html里的url链接，使得在check时不会看到没有更新的content名字
     this.canvas.onChangeStart(this.template, url)
 
     await this.page.hide()
@@ -90,7 +98,10 @@ class App {
       const html = await request.text()
       const div = document.createElement('div')
 
-      window.history.pushState({}, '', url)
+      if(push){
+        window.history.pushState({}, '', url)
+      }
+     
       // 就是说你点击哪个页面,url的后缀就是哪个页面的/collectisons or /about or /slash home
 
 
@@ -195,6 +206,8 @@ class App {
    * Listeners
    */
   addEventListeners() {
+    window.addEventListener('popstate', this.onPopState.bind(this))
+    // 浏览器返回键起作用
     window.addEventListener('mousewheel', this.onWheel.bind(this))
 
     window.addEventListener('mousedown', this.onTouchDown.bind(this))
@@ -219,7 +232,7 @@ class App {
 
         const { href } = link
 
-        this.onChange(href)
+        this.onChange({ url: href })
       }
     })
   }

@@ -1,0 +1,17 @@
+/*! classes/Detection */
+
+/*! gsap */
+
+/*! ogl */
+
+/*! shaders/plane-fragment.glsl */
+
+/*! shaders/plane-vertex.glsl */
+
+/*!**********************************!*\
+  !*** ./app/classes/Detection.js ***!
+  \**********************************/
+
+/*!**********************************************!*\
+  !*** ./app/components/Canvas/about/Media.js ***!
+  \**********************************************/

@@ -1,0 +1,27 @@
+/*! ./components/Navigation */
+
+/*! ./pages/About/About */
+
+/*! ./pages/Collections/Collections */
+
+/*! ./pages/Detail/Detail */
+
+/*! ./pages/Home */
+
+/*! classes/Detection */
+
+/*! components/Canvas */
+
+/*! components/Preloader */
+
+/*! lodash/each */
+
+/*! normalize-wheel */
+
+/*!**********************!*\
+  !*** ./app/index.js ***!
+  \**********************/
+
+/*!**********************************!*\
+  !*** ./app/classes/Detection.js ***!
+  \**********************************/

@@ -15,14 +15,14 @@ export default class {
     this.index = index;
     // 上面的elment都是需要复用的所以在这里初始化
 
-    this.createTexture();
-    this.createProgram();
-    this.createMesh();
-
     this.extra = {
       x: 0,
       y: 0
     }
+    this.createTexture();
+    this.createProgram();
+    this.createMesh();
+    this.createBounds({ sizes: this.sizes });
   }
   createTexture() {
     const image =this.element
@@ -127,7 +127,6 @@ export default class {
   }
 
   update(scroll, speed) {
-    if (!this.bounds) return
     this.upadteX(scroll.x)
     this.upadteY(scroll.y)
     this.program.uniforms.uSpeed.value = speed

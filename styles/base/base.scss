@@ -17,7 +17,7 @@ html {
   position: fixed;
 
   @include media('<phone') {
-    font-size: calc(100vw / 750 * 10);
+    font-size: calc(100vw / 750px * 10px);
   }
   // 移动端的基建
 }

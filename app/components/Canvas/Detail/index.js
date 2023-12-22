@@ -6,11 +6,14 @@ import fragment from 'shaders/plane-fragment.glsl';
 import vertex from 'shaders/plane-vertex.glsl';
 
 export default class {
-  constructor({ gl, scene, sizes }) {
+  constructor({ gl, scene, sizes, transition }) {
+    this.id = 'detail'
+
     this.element = document.querySelector('.detail__media__image')
     this.gl = gl;
     this.scene = scene;
     this.sizes = sizes;
+    this.transition = transition
 
     this.geometry = new Plane(this.gl)
     // 上面的elment都是需要复用的所以在这里初始化
@@ -18,6 +21,9 @@ export default class {
     this.createTexture();
     this.createProgram();
     this.createMesh();
+    this.createBounds({ sizes: this.sizes });
+
+    this.show();
   }
   createTexture() {
     // 在shader里面做的渐变
@@ -42,7 +48,7 @@ export default class {
       fragment,
       vertex,
       uniforms: {
-        uAlpha: { value: 1 },
+        uAlpha: { value: 0 },
         tMap: { value: this.texture }
       }
     })
@@ -53,6 +59,8 @@ export default class {
       geometry: this.geometry,
       program: this.program,
     });
+
+    this.mesh.rotation.z = Math.PI * 0.01
 
     this.mesh.setParent(this.scene);
     // mesh是scene的子元素。
@@ -72,11 +80,21 @@ export default class {
 
   // Animations.
   show() {
-
+    if (this.transition) {
+      this.transition.animate(this.mesh, _ => {
+        this.program.uniforms.uAlpha.value = 1
+      })
+    } else {
+      GSAP.to(this.program.uniforms.uAlpha, {
+        value: 1
+      })
+    }
   }
 
   hide() {
-
+    GSAP.to(this.program.uniforms.uAlpha, {
+      value: 0,
+    });
   }
 
   // Events
@@ -87,16 +105,16 @@ export default class {
 
   }
 
-  onTouchDown(){
+  onTouchDown() {
 
   }
 
-  onTouchMove(){
+  onTouchMove() {
 
   }
 
-  onTouchUp(){
-    
+  onTouchUp() {
+
   }
 
   // Loop
@@ -125,11 +143,15 @@ export default class {
   }
 
   update() {
-    if (!this.bounds) return
     this.upadteX()
     this.upadteY()
 
-
+  }
+  /**
+   * Destroy
+   */
+  destroy() {
+    this.scene.removeChild(this.mesh)
   }
 
 

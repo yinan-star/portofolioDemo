@@ -1,6 +1,7 @@
 // //处理照片
 import GSAP from 'gsap'
-import { Mesh, Program} from 'ogl';
+import { Mesh, Program } from 'ogl';
+import Detection from 'classes/Detection';
 
 import fragment from 'shaders/plane-fragment.glsl';
 import vertex from 'shaders/plane-vertex.glsl';
@@ -15,20 +16,21 @@ export default class {
     this.index = index;
     // 上面的elment都是需要复用的所以在这里初始化
 
-    this.createTexture();
-    this.createProgram();
-    this.createMesh();
-
     this.extra = {
       x: 0,
       y: 0
-    }
+    };
+    this.createTexture();
+    this.createProgram();
+    this.createMesh();
+    this.createBounds({ sizes: this.sizes })
+
   }
   createTexture() {
-    const image =this.element.querySelector('img')
+    const image = this.element.querySelector('img')
 
     this.texture = window.TEXTURES[image.getAttribute('data-src')]
-  
+
     // 如果图片渲染不出来，就看下这里
   }
 
@@ -96,12 +98,12 @@ export default class {
   updateRotation() {
     // 视窗的左右两边
     this.mesh.rotation.z = GSAP.utils.mapRange(
-      -this.sizes.width / 2, 
-      this.sizes.width / 2, 
-      Math.PI * 0.1, 
-      -Math.PI * 0.1, 
+      -this.sizes.width / 2,
+      this.sizes.width / 2,
+      Math.PI * 0.1,
+      -Math.PI * 0.1,
       this.mesh.position.x
-      )
+    )
   }
 
   upadteScale() {
@@ -129,10 +131,13 @@ export default class {
   }
 
   upadteY(y = 0) {
-    this.y = (this.bounds.top + y) / window.innerHeight
+    this.y = (this.bounds.top + y) / window.innerHeight;
+
+    const extra = Detection.isPhone() ? 15 : 40;
+    // Gallery图片的滚动间距在手机上的设置
     this.mesh.position.y = (this.sizes.height / 2) - (this.mesh.scale.y / 2) - (this.y * this.sizes.height)
     // 这个x是之前在index里设置的鼠标拖动的当前的x,y的距离。所以，想移动匹配好的图片，需要在整个容器加上鼠标x,y移动的距离
-    this.mesh.position.y += Math.cos((this.mesh.position.x / this.sizes.width) * Math.PI * 0.1) *40 - 40
+    this.mesh.position.y += Math.cos((this.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * extra - extra
     // 累加是方向，向上还是向下
     // Math.PI是弧度？
     // 75也是弧度
@@ -140,8 +145,6 @@ export default class {
 
   update(scroll) {
     // 以下的方法会不断更新执行
-    if (!this.bounds) return
-
     this.updateRotation()
     this.upadteScale()
     this.upadteX(scroll)

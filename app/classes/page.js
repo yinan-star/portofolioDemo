@@ -122,7 +122,7 @@ export default class Page {
     });
   }
 // Animations
-  show() {
+  show(animation) {
     return new Promise((resolve) => {
       ColorsManager.change({
         // 页面的渐变过渡
@@ -130,17 +130,22 @@ export default class Page {
         color: this.element.getAttribute('data-color'),
       });
 
-      this.animationIn = GSAP.timeline();
+      if(animation){
+        this.animationIn =animation
 
-      this.animationIn.fromTo(
-        this.element,
-        {
-          autoAlpha: 0,
-        },
-        {
-          autoAlpha: 1,
-        }
-      );
+      }else{
+        this.animationIn = GSAP.timeline();
+
+        this.animationIn.fromTo(
+          this.element,
+          {
+            autoAlpha: 0,
+          },
+          {
+            autoAlpha: 1,
+          }
+        );
+      }
 
       this.animationIn.call(() => {
         this.addEventListeners();

@@ -42,9 +42,10 @@
     font-size: 12rem;
     line-height: 0.82;
   
-    @include media('<phone') {
-      font-size: 18rem;
-    }
+    // @include media('<phone') {
+    //   font-size: 18rem;
+    // }
+    // 这个好像就是detail的标题
   }
   
   %title-200 {

@@ -1,0 +1,3 @@
+/*! For license information please see main.c3972f2134ce095dbc71.hot-update.js.LICENSE.txt */
+self.webpackHotUpdatefloema("main",{"./app/classes/Detection.js":()=>{}},(function(e){e.h=()=>"97ce73afc71207363edf"}));
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5jMzk3MmYyMTM0Y2UwOTVkYmM3MS5ob3QtdXBkYXRlLmpzIiwibWFwcGluZ3MiOiI7c0ZBQUFBLEVBQW9CQyxFQUFJLElBQU0iLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9mbG9lbWEvd2VicGFjay9ydW50aW1lL2dldEZ1bGxIYXNoIl0sInNvdXJjZXNDb250ZW50IjpbIl9fd2VicGFja19yZXF1aXJlX18uaCA9ICgpID0+IChcIjk3Y2U3M2FmYzcxMjA3MzYzZWRmXCIpIl0sIm5hbWVzIjpbIl9fd2VicGFja19yZXF1aXJlX18iLCJoIl0sInNvdXJjZVJvb3QiOiIifQ==
